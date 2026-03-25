@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title> tc của mduy </title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+}
+
+/* chữ cóooo */
+.cooo {
+    position: fixed;
+    color: #00ffcc;
+    font-weight: bold;
+    font-family: Arial;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* trái tim */
+.heart {
+    position: fixed;
+    color: pink;
+    font-size: 20px;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+// ===== CHỮ CÓOOO =====
+function createCooo() {
+    let el = document.createElement("div");
+    el.className = "cooo";
+
+    let length = Math.floor(Math.random() * 10) + 3;
+    el.innerText = "có" + "o".repeat(length);
+
+    let side = Math.floor(Math.random() * 4);
+    let x, y;
+
+    if (side === 0) {
+        x = -100;
+        y = Math.random() * window.innerHeight;
+    } else if (side === 1) {
+        x = window.innerWidth + 100;
+        y = Math.random() * window.innerHeight;
+    } else if (side === 2) {
+        x = Math.random() * window.innerWidth;
+        y = -50;
+    } else {
+        x = Math.random() * window.innerWidth;
+        y = window.innerHeight + 50;
+    }
+
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+
+    document.body.appendChild(el);
+
+    let dx = (Math.random() - 0.5) * 6;
+    let dy = (Math.random() - 0.5) * 6;
+
+    let move = setInterval(() => {
+        x += dx;
+        y += dy;
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+
+        if (x < -200 || x > window.innerWidth + 200 || y < -200 || y > window.innerHeight + 200) {
+            clearInterval(move);
+            el.remove();
+        }
+    }, 30);
+}
+
+setInterval(createCooo, 300);
+
+
+// ===== TRÁI TIM RƠI =====
+function createHeart() {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤";
+
+    let x = Math.random() * window.innerWidth;
+    let y = -20;
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    document.body.appendChild(heart);
+
+    let speed = Math.random() * 3 + 2;
+
+    let fall = setInterval(() => {
+        y += speed;
+        heart.style.top = y + "px";
+
+        if (y > window.innerHeight) {
+            clearInterval(fall);
+            heart.remove();
+        }
+    }, 30);
+}
+
+setInterval(createHeart, 200);
+
+</script>
+
+</body>
+</html>
